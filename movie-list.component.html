@@ -1,0 +1,27 @@
+<div id="container">
+  <div id="search">
+    <div>
+      <form #formRef="ngForm">
+        <input name="keyword" id="input" class="form-control" type="text" 
+        required placeholder="Type to search..." [(ngModel)]="keyword">
+      </form>
+    </div>
+    <div>
+      <button id="button" type="submit" (click)="getMoviesByName(keyword)">Result</button>
+    </div>
+  </div>
+  <div style="clear:both"></div>
+  <div id="movie-list">
+    <div class="category-list" *ngFor="let category of CATEGORIES">
+      <h2>{{category}} ({{getMoviesByCategory(category).length}})</h2>
+      <div class="movie-item" *ngFor="let movie of getMoviesByCategory(category)">
+        <p *ngIf="calculateStars(movie.rating)==1">&#9733;&#9734;&#9734;&#9734;&#9734;</p>
+        <p *ngIf="calculateStars(movie.rating)==2">&#9733;&#9733;&#9734;&#9734;&#9734;</p>
+        <p *ngIf="calculateStars(movie.rating)==3">&#9733;&#9733;&#9733;&#9734;&#9734;</p>
+        <p *ngIf="calculateStars(movie.rating)==4">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+        <p *ngIf="calculateStars(movie.rating)==5">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <a href="{{getURL(movie.title)}}">{{movie.title}}</a>
+      </div>
+    </div>
+  </div>
+</div>
